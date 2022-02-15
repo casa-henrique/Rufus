@@ -4,6 +4,8 @@ import sounddevice as sd
 import queue
 import vosk
 import sys
+import pyttsx3
+import json
 
 '''
 # RECONHECIMENTO ONLINE COM O GOOGLE
@@ -19,7 +21,18 @@ with sr.Microphone() as source:
         
         print(r.recognize_google(audio, language="pt-br"))
 '''
+# SINTESE DE FALA
+engine = pyttsx3.init()
 
+voices = engine.getProperty('voices') 
+engine.setProperty('voice', voices[-2].id)
+
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
+
+
+# RECONHECIMENTO OFFLINE
 q = queue.Queue()
 
 def int_or_str(text):
@@ -61,10 +74,7 @@ args = parser.parse_args(remaining)
 try:
     if args.model is None:
         args.model = "model"
-    if not os.path.exists(args.model):
-        print ("Please download a model for your language from https://alphacephei.com/vosk/models")
-        print ("and unpack as 'model' in the current folder.")
-        parser.exit(0)
+
     if args.samplerate is None:
         device_info = sd.query_devices(args.device, 'input')
         # soundfile expects an int, sounddevice provides a float:
@@ -79,7 +89,6 @@ try:
 
     with sd.RawInputStream(samplerate=args.samplerate, blocksize = 8000, device=args.device, dtype='int16',
                             channels=1, callback=callback):
-            print('#' * 80)
             print('Press Ctrl+C to stop the recording')
             print('#' * 80)
 
@@ -87,11 +96,14 @@ try:
             while True:
                 data = q.get()
                 if rec.AcceptWaveform(data):
-                    print(rec.Result())
-                else:
-                    print(rec.PartialResult())
-                if dump_fn is not None:
-                    dump_fn.write(data)
+                    result = rec.Result()
+                    result = json.loads(result)
+
+                    if result is not None:
+                        text = result['text']
+
+                        print(text)
+                        speak(text)
 
 except KeyboardInterrupt:
     print('\nDone')
