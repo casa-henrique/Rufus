@@ -1,0 +1,4 @@
+SpeechRecognition==3.8.1
+PyAudio==0.2.11
+pipwin==0.5.1
+vosk==0.3.32
