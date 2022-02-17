@@ -113,8 +113,8 @@ try:
                         if text == 'que dia é hoje' or text == 'em que mês estamos':
                             speak(core.SystemInfo.get_day())
                         if text == 'obrigado' or 'obrigada':
-                            speak(core.SystemInfo.get_congratulations())
 
+                            speak(core.SystemInfo.get_congratulations())
 except KeyboardInterrupt:
     print('\nDone')
     parser.exit(0)
