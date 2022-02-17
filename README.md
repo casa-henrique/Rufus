@@ -9,4 +9,8 @@ Tecnologias que utilizarei:
     - Sinteses de voz
         -pyttsx3
 
+    - Comandos
+        - snips-nlu
+        - processamento e entendimento de linguagem natural
+
     - IA

@@ -1,4 +1,5 @@
 import argparse
+import speech_recognition as sr
 import os
 import sounddevice as sd
 import queue
@@ -6,10 +7,21 @@ import vosk
 import sys
 import pyttsx3
 import json
+import core
+
+
+# SINTESE DE FALA
+engine = pyttsx3.init()
+
+voices = engine.getProperty('voices') 
+engine.setProperty('voice', voices[-2].id)
+
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
 
 '''
 # RECONHECIMENTO ONLINE COM O GOOGLE
-import speech_recognition as sr
 
 # Criando o reconhecedor
 r = sr.Recognizer()
@@ -21,15 +33,6 @@ with sr.Microphone() as source:
         
         print(r.recognize_google(audio, language="pt-br"))
 '''
-# SINTESE DE FALA
-engine = pyttsx3.init()
-
-voices = engine.getProperty('voices') 
-engine.setProperty('voice', voices[-2].id)
-
-def speak(text):
-    engine.say(text)
-    engine.runAndWait()
 
 
 # RECONHECIMENTO OFFLINE
@@ -89,10 +92,11 @@ try:
 
     with sd.RawInputStream(samplerate=args.samplerate, blocksize = 8000, device=args.device, dtype='int16',
                             channels=1, callback=callback):
-            print('Press Ctrl+C to stop the recording')
             print('#' * 80)
 
             rec = vosk.KaldiRecognizer(model, args.samplerate)
+
+            #Loop do reconhecimento de fala
             while True:
                 data = q.get()
                 if rec.AcceptWaveform(data):
@@ -103,7 +107,13 @@ try:
                         text = result['text']
 
                         print(text)
-                        speak(text)
+
+                        if text == 'que horas são' or text == 'me diga que horas são':
+                            speak(core.SystemInfo.get_time())
+                        if text == 'que dia é hoje' or text == 'em que mês estamos':
+                            speak(core.SystemInfo.get_day())
+                        if text == 'obrigado' or 'obrigada':
+                            speak(core.SystemInfo.get_congratulations())
 
 except KeyboardInterrupt:
     print('\nDone')
