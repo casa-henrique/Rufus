@@ -1,7 +1,7 @@
 commands:
   #Horas
   - command:
-    input: Que horas são?
+    input: Que horas são
     entity: time
     action: getTime
   - command:
@@ -11,21 +11,21 @@ commands:
 
   #Dia ou Mês
   - command:
-    input: Que dia é hoje?
+    input: Que dia é hoje
     entity: time
-    action: getData
+    action: getDate
   - command:
-    input: em que mês estamos?
+    input: em que mês estamos
     entity: time
-    action: getData
+    action: getDate
   - command:
     input: Data de hoje
     entity: time
-    action: getData
+    action: getDate
 
   #Previsão do tempo
   - command:
-    input: Qual a previsão do tempo?
+    input: Qual a previsão do tempo
     entity: weather
     action: getWheather
   - command:
@@ -33,59 +33,31 @@ commands:
     entity: weather
     action: getWheather
   - command:
-    input: Hoje vai chover?
+    input: Hoje vai chover
     entity: weather
     action: getRain
 
     #Open
   - command:
-    input: Abrir Google
+    input: Abrir Bloco de notas
     entity: open
-    action: getGoogle
+    action: getNotepad
   - command:
-    input: Abrir Youtube
+    input: Abrir Brave
     entity: open
-    action: getYoutube
+    action: getBrave
   - command:
-    input: Abrir Gmail
+    input: Abrir Bravo
     entity: open
-    action: getGmail
-  - command:
-    input: Abrir email
-    entity: open
-    action: getGmail
-  - command:
-    input: Abrir Counter Strike
-    entity: open
-    action: getCounter
-  - command:
-    input: Abrir Cs
-    entity: open
-    action: getCounter
-  - command:
-    input: Abrir Epic
-    entity: open
-    action: getEpic
-  - command:
-    input: Abrir Epic Games
-    entity: open
-    action: getEpic
+    action: getBrave
 
     #Agradecimento
   - command:
     input: obrigado
     entity: congrats
     action: getCongratulations
-  - command:
-    input: obrigada
-    entity: congrats
-    action: getCongratulations
 
     #Curiosidades
-  - command:
-    input: Qual a cotação do dolar?
-    entity: scrap
-    action: getDolar
   - command:
     input: cotação do dolar
     entity: scrap
@@ -94,17 +66,21 @@ commands:
     input: cotação do euro
     entity: scrap
     action: getEuro
-  - command:
-    input: Qual a cotação do euro?
-    entity: scrap
-    action: getEuro
 
     #uteis
   - command:
     input: Pegar jogos da epic
     entity: scrap
-    action: getEpicGames
+    action: EpicGames
   - command:
-    input: epic de graça
+    input: Abrir Google
     entity: scrap
-    action: getEpicGames
+    action: Google
+  - command:
+    input: Abrir Youtube
+    entity: scrap
+    action: Youtube
+  - command:
+    input: Abrir email
+    entity: scrap
+    action: Gmail

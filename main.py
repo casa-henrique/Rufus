@@ -22,6 +22,26 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
+def evaluate(text):
+ #Reconhecer entidade do texto
+    entity = classify(text)
+    
+    #Tempo
+    if entity == 'time|getTime':
+        speak(core.SystemInfo.get_time())
+    elif entity == 'time|getDate':
+        speak(core.SystemInfo.get_date())
+
+    #Abrir programas
+    elif entity == 'open|getNotepad':
+        speak('Abrindo o bloco de notas')
+        os.system('notepad.exe')
+    elif entity == 'open|getBrave':
+        speak('Abrindo o Brave')
+        os.system('"C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"')
+
+    print('texto: {},  Entity: {}'.format(text, entity))
+
 '''
 # RECONHECIMENTO ONLINE COM O GOOGLE
 
@@ -107,14 +127,7 @@ try:
 
                     if result is not None:
                         text = result['text']
-
-                        #Reconhecer entidade do texto
-                        entity = classify(text)
-
-                        if entity == 'time\getTime':
-                            speak(core.SystemInfo.get_time())
-
-                        print('texto: {},  Entity: {}'.format(text, entity))
+                        evaluate(text)
                   
 
 except KeyboardInterrupt:
