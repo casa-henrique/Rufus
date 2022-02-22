@@ -12,14 +12,16 @@ for k, label in enumerate(labels):
     label2idx[label] = k
     idx2label[k] = label
 
-# Método para classificar texto em uma entidade
+# Classificar texto em um entidade
 def classify(text):
-    x = np.zeros((1, 26, 256), dtype='float32')
+    # Criar um array de entrada
+    x = np.zeros((1, 25, 256), dtype='float32')
 
+    # Preencher o array com dados do texto.
     for k, ch in enumerate(bytes(text.encode('utf-8'))):
         x[0, k, int(ch)] = 1.0
 
-    #Fazendo a previsão
+    # Fazer a previsão
     out = model.predict(x)
     idx = out.argmax()
     return idx2label[idx]

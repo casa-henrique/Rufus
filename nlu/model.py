@@ -25,10 +25,9 @@ print('Maior seq:', max_seq)
 
 # input data one-hot encoding
 input_data = np.zeros((len(inputs), max_seq, 256), dtype='float32')
-
 for i, inp in enumerate(inputs):
     for k, ch in enumerate(bytes(inp.encode('utf-8'))):
-        input_data[i, k, int(ch)] = 1.0 
+        input_data[i, k, int(ch)] = 1.0
 
 '''
 # input data sparse - menos focado na memória --> interessante para o futuro
@@ -71,6 +70,9 @@ model.add(Dense(len(output_data), activation='softmax'))
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
 
 model.fit(input_data, output_data, epochs=780)
+
+# Salvar model
+model.save('model.h5')
 
 # Método para classificar texto em uma entidade
 def classify(text):
