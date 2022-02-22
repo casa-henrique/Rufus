@@ -112,9 +112,9 @@ try:
                             speak(core.SystemInfo.get_time())
                         if text == 'que dia é hoje' or text == 'em que mês estamos':
                             speak(core.SystemInfo.get_day())
-                        if text == 'obrigado' or 'obrigada':
-
+                        if text == 'obrigado' or text == 'obrigada':
                             speak(core.SystemInfo.get_congratulations())
+
 except KeyboardInterrupt:
     print('\nDone')
     parser.exit(0)
