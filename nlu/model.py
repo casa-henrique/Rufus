@@ -43,12 +43,16 @@ for i, input in enumerate(inputs):
 # Output Data
 labels = set(outputs)
 
+fwrite = open('labels.txt', 'w', encoding='utf-8')
+
 label2idx = {}
 idx2label = {}
 
 for k, label in enumerate(labels):
     label2idx[label] = k
     idx2label[k] = label
+    fwrite.write(label + '\n')
+fwrite.close()
 
 output_data = []
 
@@ -79,7 +83,3 @@ def classify(text):
     out = model.predict(x)
     idx = out.argmax()
     print(idx2label[idx])
-
-while True:
-    text= input('Digite algo: ')
-    classify(text)

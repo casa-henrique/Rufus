@@ -41,11 +41,35 @@ commands:
   - command:
     input: Abrir Google
     entity: open
-    action:
+    action: getGoogle
   - command:
     input: Abrir Youtube
     entity: open
-    action:
+    action: getYoutube
+  - command:
+    input: Abrir Gmail
+    entity: open
+    action: getGmail
+  - command:
+    input: Abrir email
+    entity: open
+    action: getGmail
+  - command:
+    input: Abrir Counter Strike
+    entity: open
+    action: getCounter
+  - command:
+    input: Abrir Cs
+    entity: open
+    action: getCounter
+  - command:
+    input: Abrir Epic
+    entity: open
+    action: getEpic
+  - command:
+    input: Abrir Epic Games
+    entity: open
+    action: getEpic
 
     #Agradecimento
   - command:
@@ -56,3 +80,31 @@ commands:
     input: obrigada
     entity: congrats
     action: getCongratulations
+
+    #Curiosidades
+  - command:
+    input: Qual a cotação do dolar?
+    entity: scrap
+    action: getDolar
+  - command:
+    input: cotação do dolar
+    entity: scrap
+    action: getDolar
+  - command:
+    input: cotação do euro
+    entity: scrap
+    action: getEuro
+  - command:
+    input: Qual a cotação do euro?
+    entity: scrap
+    action: getEuro
+
+    #uteis
+  - command:
+    input: Pegar jogos da epic
+    entity: scrap
+    action: getEpicGames
+  - command:
+    input: epic de graça
+    entity: scrap
+    action: getEpicGames
