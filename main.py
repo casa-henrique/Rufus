@@ -1,6 +1,6 @@
 import argparse
 import speech_recognition as sr
-import os
+import psutil,os
 import sounddevice as sd
 import queue
 import vosk
@@ -22,6 +22,11 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
+def close_program(name):
+    for process in (process for process in psutil.process_iter() if process.name()==name):
+        process.kill()
+
+
 def evaluate(text):
  #Reconhecer entidade do texto
     entity = classify(text)
@@ -33,12 +38,17 @@ def evaluate(text):
         speak(core.SystemInfo.get_date())
 
     #Abrir programas
-    elif entity == 'open|getNotepad':
+    elif entity == 'open|Notepad':
         speak('Abrindo o bloco de notas')
         os.system('notepad.exe')
-    elif entity == 'open|getBrave':
+    elif entity == 'open|Brave':
         speak('Abrindo o Brave')
         os.system('"C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"')
+    
+    #Fechar Programas
+    elif entity == 'close|Notepad':
+        speak('Fechando o bloco de notas')
+        close_program('notepad.exe')
 
     print('texto: {},  Entity: {}'.format(text, entity))
 

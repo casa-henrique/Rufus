@@ -70,7 +70,7 @@ model.add(Dense(len(output_data), activation='softmax'))
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
 
-model.fit(input_data, output_data, epochs=200)
+model.fit(input_data, output_data, epochs=780)
 
 # Método para classificar texto em uma entidade
 def classify(text):

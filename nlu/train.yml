@@ -41,15 +41,25 @@ commands:
   - command:
     input: Abrir Bloco de notas
     entity: open
-    action: getNotepad
+    action: Notepad
+  - command:
+    input: Criar um Bloco de notas
+    entity: open
+    action: Notepad
   - command:
     input: Abrir Brave
     entity: open
-    action: getBrave
+    action: Brave
   - command:
     input: Abrir Bravo
     entity: open
-    action: getBrave
+    action: Brave
+
+    #Close
+  - command:
+    input: Fechar Bloco de notas
+    entity: close
+    action: Notepad
 
     #Agradecimento
   - command:
